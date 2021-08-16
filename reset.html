@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/css/uikit.min.css" />
+</head>
+<body>
+    <div class="uk-flex uk-flex-center">
+        <div style="margin: 10px;" class="uk-card uk-card-default uk-card-body uk-margin-left">
+            <legend class="uk-legend">New Password</legend>
+            <div class="uk-margin">
+                <input id="new-password" class="uk-input" type="text" placeholder="New Password">
+            </div>
+            <button onclick="submit()" class="uk-button uk-button-secondary">Change password</button>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script>
+        const submit = () => {
+            const newPassword = document.getElementById('new-password').value;
+            const token = (new URLSearchParams(window.location.search)).get("token");
+            axios.post('http://localhost:5000/api/forgot-password' , { newPassword: newPassword, token: token })
+            .then(function(){
+                alert("Password changed!");
+            })
+            .catch(function() {
+                alert("Something went wrong!")
+            })
+            ;
+        }
+    </script>
+</html>
